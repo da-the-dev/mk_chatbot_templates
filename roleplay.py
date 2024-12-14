@@ -8,12 +8,12 @@ from aiogram.filters import CommandStart, Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message
-from dotenv import load_dotenv
+from dotenv import find_dotenv, load_dotenv
 from openai import AsyncOpenAI
 
-BASE_URL = "http://ПОМЕНЯТЬ/v1"
+BASE_URL = "https://api.proxyapi.ru/openai/v1"
 
-load_dotenv()
+load_dotenv(find_dotenv())
 
 TOKEN = getenv("BOT_TOKEN")
 OPENAI_TOKEN = getenv("OPENAI_API_TOKEN")
@@ -21,6 +21,7 @@ OPENAI_TOKEN = getenv("OPENAI_API_TOKEN")
 client = AsyncOpenAI(
     api_key=OPENAI_TOKEN,
     base_url=BASE_URL,
+    timeout=10.0,
 )
 
 rp_router = Router()
